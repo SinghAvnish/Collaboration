@@ -7,14 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.niit.collaborate.dao.userdaoimpl;
+import com.niit.collaborate.dao.UserDAOImpl;
 import com.niit.collaborate.model.User;
-@Transactional
 @Service
-public class userservice
+@Transactional
+
+public class UserService
 {
 	@Autowired (required=true)
-	userdaoimpl userdao;
+	UserDAOImpl userdao;
 
 
 	public List<User> list() 
@@ -43,7 +44,15 @@ public class userservice
 		return userdao.get(userId);
 	}
 	
+	public User getUsername(int username){
+		return userdao.get(username);
+	}
+	public User authenticate(String username, String password)
+	{
+		return userdao.authenticate(username, password);
+	}
 	
 }
+
 
 

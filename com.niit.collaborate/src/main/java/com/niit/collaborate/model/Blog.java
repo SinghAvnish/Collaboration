@@ -4,55 +4,47 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-
+@Table(name="C_Blog")
 public class Blog
 {
 	@Id
-    
-	private int blogId;
+	@GeneratedValue(strategy = GenerationType.AUTO)	
+	private int id;
 
-	private String username;
+	private String title;
+	
+	private String description;
 	
 
-	public int getblogId() {
-		return blogId;
+	public int getId() {
+		return id;
 	}
-	public void setblogId(int blogId) {
-		this.blogId = blogId;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getUsername() {
-		return username;
+	public String getTitle() {
+		return title;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getPassword() {
-		return password;
+	public String getDescription() {
+		return description;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public Boolean getEnabled() {
-		return enabled;
-	}
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
-	private String password;
-	private Boolean enabled;
-	private String role;
 	
-
-
+	@Override
+	public String toString() {
+		return "Blog [id=" + id + ", title=" + title + ", description=" + description + "]";
+	}
+	
+	
 }

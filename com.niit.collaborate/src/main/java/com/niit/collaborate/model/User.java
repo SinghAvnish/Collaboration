@@ -1,6 +1,8 @@
 package com.niit.collaborate.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,68 +13,74 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name="c_User")
 
-public class User 
+public class User extends baseDomain
 {
-	
+@GeneratedValue(strategy = GenerationType.AUTO)	
 @Id
-private int userId;
+private int id;
 
-private String name;
+private String username;
 
-private String Email;
+private String email;
 
-private String Password;
+private String password;
 
-private String Address;
+private String address;
 
-public int getUserId() 
-{
-	return userId;
+private String role;
+
+public int getId() {
+	return id;
 }
 
-public void setUserId(int userId) 
-{
-	this.userId = userId;
+public void setId(int id) {
+	this.id = id;
 }
 
-public String getName()
-{
-	return name;
+public String getUsername() {
+	return username;
 }
 
-public void setName(String name)
-{
-	this.name = name;
+public void setUsername(String username) {
+	this.username = username;
 }
 
 public String getEmail() {
-	return Email;
+	return email;
 }
 
 public void setEmail(String email) {
-	Email = email;
+	this.email = email;
 }
 
 public String getPassword() {
-	return Password;
+	return password;
 }
 
 public void setPassword(String password) {
-	Password = password;
+	this.password = password;
 }
 
 public String getAddress() {
-	return Address;
+	return address;
 }
 
 public void setAddress(String address) {
-	Address = address;
+	this.address = address;
+}
+
+public String getRole() {
+	return role;
+}
+
+public void setRole(String role) {
+	this.role = role;
 }
 
 @Override
 public String toString() {
-	return "User [userId=" + userId + ", name=" + name + ", Email=" + Email + ", Password=" + Password + ", Address="
-			+ Address + "]";
+	return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", address="
+			+ address + ", role=" + role + "]";
 }
 
 

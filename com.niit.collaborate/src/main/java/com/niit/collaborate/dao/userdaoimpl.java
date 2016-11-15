@@ -14,17 +14,14 @@ import com.niit.collaborate.model.User;
 
 
 	@Repository
-	public class userdaoimpl implements userdao
+	public class UserDAOImpl implements UserDAO
 	{
-		public userdaoimpl() 
-		{
-
-		}
+		
 		@Autowired(required=true)
 		private SessionFactory sessionFactory;
 
 
-		public userdaoimpl(SessionFactory sessionFactory)
+		public UserDAOImpl(SessionFactory sessionFactory)
 		{
 			this.sessionFactory = sessionFactory;
 		}
@@ -54,19 +51,19 @@ import com.niit.collaborate.model.User;
 		    
 		}
 
-		public void delete(int userId)
+		public void delete(int id)
 		{
 			User UserToDelete = new User();
-			UserToDelete.setUserId(userId);
+			UserToDelete.setId(id);
 			sessionFactory.getCurrentSession().delete(UserToDelete);
 		}
 
 
 		
-		public User get(int userId)
+		public User get(int id)
 		{
 			
-			String hql = "from User where userId=" + "'"+ userId +"'";
+			String hql = "from User where id=" + "'"+ id +"'";
 			Query query = sessionFactory.getCurrentSession().createQuery(hql);
 			
 			@SuppressWarnings("unchecked")
@@ -78,6 +75,38 @@ import com.niit.collaborate.model.User;
 			
 			return null;
 		}
+		
+		
+		public User getUsername(String username)
+		{
+			
+			String hql = "from User where username=" + "'"+ username +"'";
+			Query query = sessionFactory.getCurrentSession().createQuery(hql);
+			
+			@SuppressWarnings("unchecked")
+			List<User> listuser = (List<User>) query.list();
+			
+			if (listuser != null && !listuser.isEmpty()) {
+				return listuser.get(0);
+			}
+			
+			return null;
+		}
+		public User authenticate(String username, String password){
+			String hql = "from User where username='"+username+"' and "+"password='"+password+"'";
+			Query query = sessionFactory.getCurrentSession().createQuery(hql);
+			
+		
+			@SuppressWarnings("unchecked")
+			List<User> list = (List<User>) query.list();
+			
+			if (list != null && !list.isEmpty()) {
+				return list.get(0);
+			}
+			
+			return null;
+		}
+
 		
 	
 	}
