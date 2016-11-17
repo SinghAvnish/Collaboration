@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
     
 <html lang="en-US">
   <head>
@@ -6,11 +8,11 @@
 
 
 </head>
-  <body>
+  <body >
   
    <div ng-controller="UserController as userCtrl">
    
-    <div class="container">
+       <div class="container">
 	<form name="userForm" method="POST" >
 	    <table>
 		<tr><td colspan="2">

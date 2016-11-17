@@ -21,10 +21,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.niit.collaborate.model.User;
 import com.niit.collaborate.service.UserService;
 
-
-
- 
-
 @RestController
 public class UserController
 {

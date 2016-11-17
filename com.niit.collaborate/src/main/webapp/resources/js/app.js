@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('myApp', ['ngRoute','ngResource']);
+var app = angular.module('app', ['ngRoute','ngResource']);
 app.config(function($routeProvider){
 	
 	$routeProvider
@@ -8,8 +8,8 @@ app.config(function($routeProvider){
 	/*.when('/' ,{
 		templatUrl:'c_home/home.html',
 		controller:'Homecontroller'
-		})
-	*/
+		})*/
+	
 	.when('/userPage' ,{
 		controller:'UserController',
 		templateUrl:'resources/user.jsp'
@@ -22,11 +22,11 @@ app.config(function($routeProvider){
 		
 		})
 	
-	.when('/loginpage' ,{
+	.when('/loginPage' ,{
 		controller:'UserController',
 		templateUrl:'resources/login.jsp'
 		});
 	
 
 		
-});
+})

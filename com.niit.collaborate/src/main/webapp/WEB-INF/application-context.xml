@@ -48,8 +48,8 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
-	<!-- <bean id="userservice"  class="com.niit.collaborate.service.userservice"></bean>
-	<bean id="userdaoimpl"  class="com.niit.collaborate.dao.userdaoimpl"></bean>
+	<!-- <bean id="userservice"  class="com.niit.collaborate.service.UserService"></bean>
+	<bean id="userdaoimpl"  class="com.niit.collaborate.dao.UserDAOImpl"></bean>
 	 -->
 
 </beans>

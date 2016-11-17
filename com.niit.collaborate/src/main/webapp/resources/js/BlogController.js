@@ -1,7 +1,7 @@
 'use Strict';
 
 app.factory('Blog', ['$resource', function ($resource) {
-    return $resource('http://localhost:8070/com.niit.collaborate/blog:id', {id: '@id'},
+    return $resource('http://localhost:8020/com.niit.collaborate/blog:id', {id: '@id'},
 	{
 		updateBlog: {method: 'PUT'}
 	}
@@ -51,7 +51,7 @@ app.controller('BlogController', ['Blog', '$scope', function(Blog, $scope) {
     };	
     self.Blogdelete = function(id){
 	    console.log('Inside delete');
-	    self.blog =delete({ id: id}, function() {
+	    self.blog =Blog.delete({ id: id}, function() {
 	    	self.reset();  
 	    	self.flag = 'deleted';
 	    	self.fetchAllBlogs(); 

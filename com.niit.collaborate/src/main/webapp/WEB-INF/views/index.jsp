@@ -5,23 +5,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Spring 4 MVC  Index Page</title>
-<!-- <script src="resources/js/bootstrap.min.js"></script>
- -->  
- <script src="resources/js/angular.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ 
+<script src="resources/js/angular.js"></script>
 <script src="resources/js/angular-resource.min.js"></script>
 <script src="resources/js/angular-route.js"></script>
 
 <script src="resources/js/app.js"></script> 
+
 <script src="resources/js/UserController.js"></script> 
-<script src="resources/js/userservice.js"></script> 
 <script src="resources/js/BlogController.js"></script> 
 
-
+<script src="resources/js/userservice.js"></script> 
 
 
 </head>
  
-<body ng-app= "myApp">
+<body  ng-app="app">
 	<nav class="navbar navbar-inverse" >
   <div class="container-fluid">
     <div class="navbar-header">
@@ -34,7 +35,7 @@
       
        <ul class="nav navbar-nav navbar-right">
       
-       <li><a href="loginpage" ><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+       <li><a href="loginPage" ><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
      
 	
 	

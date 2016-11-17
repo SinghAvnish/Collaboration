@@ -9,7 +9,7 @@
 <title>Insert title here</title>
     
   </head>
-  <body>
+  <body >
    <div ng-controller="BlogController as blogCtrl">
        <div class="container">
 	<form name="blogForm" method="POST">
