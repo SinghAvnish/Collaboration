@@ -1,7 +1,6 @@
-'use Strict';
-
+'use strict';
 app.factory('Blog', ['$resource', function ($resource) {
-    return $resource('http://localhost:8020/com.niit.collaborate/blog:id', {id: '@id'},
+    return $resource('http://localhost:8070/com.niit.collaborate/blog:id', {id: '@id'},
 	{
 		updateBlog: {method: 'PUT'}
 	}

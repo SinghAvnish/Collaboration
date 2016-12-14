@@ -1,13 +1,13 @@
 'use strict';
-
-app.factory('Event', ['$resource', function ($resource) {
-    return $resource('http://localhost:8020/com.niit.collaborate/event:id', {id: '@id'},
+app.factory('Event', ['$resource', function ($resource) 
+    {
+    return $resource('http://localhost:8070/com.niit.collaborate/event:id', {id: '@id'},
 	{
 		updateEvent: {method: 'PUT'}
 	}
     );
 }]);
-app.controller('EventController', ['$scope', 'Event', function($scope, Event) {
+app.controller('EventController', ['Event', '$scope', function(Event,$scope) {
     var self = this;
     self.events=[];
     self.event = new Event(); 
@@ -51,7 +51,7 @@ app.controller('EventController', ['$scope', 'Event', function($scope, Event) {
     };	
     self.Eventdelete = function(id){
 	    console.log('Inside delete');
-	    self.event =Event.delete({ id: id}, function() {
+	    self.event =Eventdelete({ id: id}, function() {
 	    	self.reset();  
 	    	self.flag = 'deleted';
 	    	self.fetchAllEvents(); 

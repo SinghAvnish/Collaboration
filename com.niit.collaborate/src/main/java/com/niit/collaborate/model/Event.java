@@ -19,7 +19,7 @@ public class Event {
 	private String venue;
 	private String description;
 	@Column(name="date_time")
-	private Date dateTime;
+	private String dateTime;
 	
 	
 	public Integer getId() {
@@ -46,20 +46,21 @@ public class Event {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Date getDateTime() {
-		return dateTime;
-	}
-	public void setDateTime(Date dateTime) {
-		this.dateTime = dateTime;
-	}
 	
 	@Override
 	public String toString() {
 		return "Event [id=" + id + ", name=" + name + ", venue=" + venue + ", description=" + description
 				+ ", dateTime=" + dateTime + "]";
 	}
+	public String getDateTime() {
+		return dateTime;
+	}
+	public void setDateTime(String dateTime) {
+		this.dateTime = dateTime;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	
-
-
 }

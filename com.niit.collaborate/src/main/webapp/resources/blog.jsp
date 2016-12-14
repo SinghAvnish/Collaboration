@@ -1,22 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
+     <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-    
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
   </head>
   <body >
    <div ng-controller="BlogController as blogCtrl">
        <div class="container">
 	<form name="blogForm" method="POST">
-	    <table>
+	    <table  class="table table-hover">
 		<tr><td colspan="2">
 		  <div ng-if="blogCtrl.flag != 'edit'">
-		     <h3> Add New Blog </h3> 
+		     <h2> Add New Blog </h2> 
 		  </div>
 		  <div ng-if="blogCtrl.flag == 'edit'">
 		     <h3> Update Blog for ID: {{ blogCtrl.blog.id }} </h3> 
@@ -29,11 +33,11 @@
          	      <span ng-show="blogForm.id.$error.required" class="msg-val">id is required.</span> </td>
 		</tr> -->
 		<tr>
-		      <td>title: </td> <td><input type="text" name="title" ng-model="blogCtrl.blog.title" required/> 
+		      <td><label><h3>Title: </h3></label></td> <td><input type="text" name="title" id="title"class="form-control" ng-model="blogCtrl.blog.title" required/> 
          	      <span ng-show="blogForm.title.$error.required" class="msg-val">title is required.</span> </td>
 		</tr>
 		<tr>
-		      <td>description: </td> <td><input type="text" name="description" ng-model="blogCtrl.blog.description" required/> 
+		      <td><label><h3>Description: </h3></label></td> <td><input type="text" name="description" id="description" class="form-control" ng-model="blogCtrl.blog.description" required/> 
          	      <span ng-show="blogForm.description.$error.required" class="msg-val">description is required.</span> </td>
 		</tr>
 		
@@ -43,9 +47,9 @@
 		     <td colspan="2"> <span ng-if="blogCtrl.flag=='created'" class="msg-success">Blog successfully added.</span>
 		     <span ng-if="blogCtrl.flag=='failed'" class="msg-val">Blog already exists.</span> </td>
 		</tr>
-	        <tr><td colspan="2">
+	        <tr><td colspan="12">
 	            <div ng-if="blogCtrl.flag != 'edit'">
-		       <input  type="submit" ng-click="blogCtrl.addBlog()" value="Add Blog"/> 
+		        <button type="submit" ng-click="blogCtrl.addBlog()" value="Add Blog"> Add Blog</button> 
 		       <input type="button" ng-click="blogCtrl.reset()" value="Reset"/>
 		    </div>
 		    <div ng-if="blogCtrl.flag == 'edit'">
@@ -58,7 +62,7 @@
 		</tr>
 	    </table>     
 	</form>
-        <table>
+        <table  class="table table-bordered">
 	      <tr><th>Blog Id</th> 
 	          <th>Title</th> 
 	          <th>Description</th> 

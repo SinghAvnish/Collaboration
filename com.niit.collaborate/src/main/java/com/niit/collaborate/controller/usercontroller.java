@@ -19,7 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.niit.collaborate.model.User;
+import com.niit.collaborate.service.FriendService;
 import com.niit.collaborate.service.UserService;
+
+
+
+
+		
+
+
+
+ 
 
 @RestController
 public class UserController
@@ -27,6 +37,9 @@ public class UserController
 	
 	@Autowired(required=true)
 	private UserService userservice;
+	
+	@Autowired(required=true)
+	private FriendService friendservice;
 		
 		@RequestMapping(value="/user{id}", method = RequestMethod.GET )
 		public ResponseEntity<User> get(@PathVariable("id") Integer id) 
@@ -68,23 +81,37 @@ public class UserController
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		}	
 		
-		@RequestMapping(value="/user/authenticate", method=RequestMethod.POST)
-		public ResponseEntity<User> authenticate(@RequestBody User user, HttpSession session) {
-	     user=userservice.authenticate(user.getUsername(),user.getPassword());
-	     if(user==null){
-	    	 user=new User();
-	    	
-	     }else
-	     {
-	    	
-	    	 session.setAttribute("loggedInUser", user);
-	    	 session.setAttribute("loggedInUsername", user.getUsername());
-	    	 
-	    	 
-	     }
-			return new ResponseEntity<User>(user, HttpStatus.OK);
-			
-		}
+		 @RequestMapping(value="/user/authenticate", method=RequestMethod.POST)
+		  public ResponseEntity<User> authenticate(@RequestBody User user, HttpSession session){
+			  user = userservice.authenticate(user.getUsername(), user.getPassword());
+			  if(user==null){
+				  user = new User(); // Do we need to create new user?
+				  user.setErrorCode("404");
+				  user.setErrorMessage("Invalid Credentials. please enter valid credentials");
+				  }
+			  else
+			  {
+				  user.setErrorCode("200");
+				  session.setAttribute("loggedInUser", user);
+				  session.setAttribute("loggedInUserId", user.getId());
+				  int loggedInUserId =(Integer)session.getAttribute("loggedInUserId");
+				  System.out.println("stored in session"+loggedInUserId);
+				  System.out.println("user name is="+user.getUsername());
+				  System.out.println("password is="+user.getPassword());
+				  System.out.println("user id"+user.getId());
+				  friendservice.setOnline(user.getId());
+				 /*userService.setOnline(user.getId());*/
+				  
+			  }
+			  return new ResponseEntity<User> (user, HttpStatus.OK );
+		  }
+		    
+		  @RequestMapping(value="/user/logout", method=RequestMethod.GET)
+		  public  String logout(HttpSession session){
+			  int loggedInUserId =(Integer)session.getAttribute("loggedInUserId");
+			  session.invalidate();
+			  return("You successfully loggedout");
+		  }
 	}   
 	
 

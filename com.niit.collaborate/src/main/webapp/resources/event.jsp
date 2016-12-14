@@ -12,7 +12,7 @@
    <div ng-controller="EventController as eventCtrl">
        <div class="container">
 	<form name="eventForm" method="POST">
-	    <table>
+	    <table class="table table-hover">
 		<tr><td colspan="2">
 		  <div ng-if="eventCtrl.flag != 'edit'">
 		     <h3> Add New event </h3> 
@@ -28,20 +28,20 @@
          	      <span ng-show="eventForm.id.$error.required" class="msg-val">id is required.</span> </td>
 		</tr> -->
 		<tr>
-		      <td>name: </td> <td><input type="text" name="name" ng-model="eventCtrl.event.name" required/> 
+		      <td>name: </td> <td><input type="text" name="name" ng-model="eventCtrl.event.name" required/><br> 
          	      <span ng-show="eventForm.name.$error.required" class="msg-val">name is required.</span> </td>
 		</tr>
 		
 		<tr>
-		      <td>venue: </td> <td><input type="text" name="venue" ng-model="eventCtrl.event.venue" required/> 
+		      <td>venue: </td> <td><input type="text" name="venue" ng-model="eventCtrl.event.venue" required/> <br>
          	      <span ng-show="eventForm.venue.$error.required" class="msg-val">venue is required.</span> </td>
 		</tr>
 		<tr>
-		      <td>description: </td> <td><input type="text" name="description" ng-model="eventCtrl.event.description" required/> 
+		      <td>description: </td> <td><input type="text" name="description" ng-model="eventCtrl.event.description" required/><br> 
          	      <span ng-show="eventForm.description.$error.required" class="msg-val">description is required.</span> </td>
 		</tr>
 		<tr>
-		      <td>dateTime: </td> <td><input type="text" name="dateTime" ng-model="eventCtrl.event.dateTime" required/> 
+		      <td>dateTime: </td> <td><input type="text" name="dateTime" ng-model="eventCtrl.event.dateTime" required/> <br>
          	      <span ng-show="eventForm.dateTime.$error.required" class="msg-val">dateTime is required.</span> </td>
 		</tr>
 		
@@ -65,12 +65,13 @@
 		</tr>
 	    </table>     
 	</form>
-        <table>
+        <table class="table table-bordered">
 	      <tr><th>EventId</th> 
 	          <th>Name</th>
 	          <th>Venue</th>
 	          <th>Description</th> 
-	          <th>dateTime</th>
+	          <th>date</th>
+	          <th>Action</th>
 	          
 	      </tr>
 	      <tr ng-repeat="row in eventCtrl.events">
@@ -87,10 +88,10 @@
 		    <span ng-if="eventCtrl.flag=='updated' && row.id==eventCtrl.updatedId" class="msg-success">event successfully updated.</span> </td> 
 	      </tr>	
 	</table>
-	</div>     
+	</div>     <!-- 
 <script src="resources/js/angular.min.js"></script>
 <script src="resources/js/angular-resource.min.js"></script>
-<script src="resources/js/event.js"></script> 
+<script src="resources/js/event.js"></script> --> 
  </body>
  
 </html> 

@@ -43,5 +43,10 @@ public class BlogService {
 		return blogdao.get(blogId);
 	}
 	
+	public Blog getView(int id) 
+	{
+		return blogdao.getView(id);
+	}
+	
 
 }

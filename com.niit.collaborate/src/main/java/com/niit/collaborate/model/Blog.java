@@ -41,5 +41,10 @@ public class Blog
 		this.description = description;
 	}
 	
+	@Override
+	public String toString() {
+		return "Blog [id=" + id + ", title=" + title + ", description=" + description + "]";
+	}
+	
 	
 }
