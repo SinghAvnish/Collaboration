@@ -13,39 +13,34 @@ import com.niit.collaborate.model.Blog;
 @Transactional
 public class BlogService {
 	@Autowired (required=true)
-	BlogDAOImpl blogdao;
+	BlogDAOImpl BlogDAO;
 
 
 	public List<Blog> getAllBlogs() 
 	{
-		return blogdao.getAllBlogs();
+		return BlogDAO.getAllBlogs();
 	}
 	
 	public boolean save(Blog blog)
 	{
-		  blogdao.save(blog);
+		BlogDAO.save(blog);
 		  
 		  return false;
 	}
 		
 	public void update(Blog blog)
 	{
-		  blogdao.update(blog);
+		BlogDAO.update(blog);
 	}
 	
 	public void delete(int blogId) 
 	{
-		blogdao.delete(blogId);
+		BlogDAO.delete(blogId);
 		
 	}
 	public Blog get(int blogId)
 	{
-		return blogdao.get(blogId);
-	}
-	
-	public Blog getView(int id) 
-	{
-		return blogdao.getView(id);
+		return BlogDAO.get(blogId);
 	}
 	
 

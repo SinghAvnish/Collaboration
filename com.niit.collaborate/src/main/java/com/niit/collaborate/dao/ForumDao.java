@@ -6,13 +6,13 @@ import com.niit.collaborate.model.Forum;
 
 public interface ForumDao {
 
-	void saveOrUpdateForum(Forum forum);
-
-	void deleteForum(int forumId);
-
-	Forum getForum(int forumId);
-
-	List<Forum> listForums();
+	public boolean add(Forum forum);
 	
-	List<Forum> listForumByCreatedAt(char status);
+	List<Forum> listForum();
+	
+	Forum getForumById(int forumId);
+	
+	void update(Forum forum);
+	
+    void delete(int forumId);
 }

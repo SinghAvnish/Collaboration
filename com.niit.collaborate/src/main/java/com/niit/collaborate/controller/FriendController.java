@@ -16,8 +16,6 @@ import com.niit.collaborate.model.Friend;
 import com.niit.collaborate.service.FriendService;
 
 
-
-
 @RestController
 public class FriendController {
 	@Autowired (required=true)
@@ -29,7 +27,7 @@ public class FriendController {
 	@RequestMapping(value="/myFriends", method = RequestMethod.GET )
 	public ResponseEntity<List<Friend>> getMyFriends(HttpSession session) {
 		
-		int loggedInUserId =(Integer)session.getAttribute("loggedInUserId");
+		 int loggedInUserId =(Integer)session.getAttribute("loggedInUserId");
 		System.out.println("loggedInUserId is="+loggedInUserId);
 		List<Friend> myFriends= friendService.getMyFriends(loggedInUserId);
 		return new ResponseEntity<List<Friend>>(myFriends, HttpStatus.OK);
@@ -49,7 +47,7 @@ public class FriendController {
 	@RequestMapping(value="/unFriend/{friendId}", method = RequestMethod.GET )
 	public ResponseEntity<Friend> unFriend(@PathVariable("friendId") int friendId,HttpSession session ) {
 		 int loggedInUserId =(Integer)session.getAttribute("loggedInUserId");
-		friend.setId(loggedInUserId);
+		/*friend.setId(loggedInUserId);*/
 		System.out.println("loggedInUserId is"+loggedInUserId);
 		friend.setFriendId(loggedInUserId);
 		
@@ -63,7 +61,7 @@ public class FriendController {
 	@RequestMapping(value="/rejectFriend/{friendId}", method = RequestMethod.GET )
 	public ResponseEntity<Friend>  rejectFriendRequest(@PathVariable("friendId") int friendId,HttpSession session ) {
 		 int loggedInUserId =(Integer)session.getAttribute("loggedInUserId");
-		friend.setId(loggedInUserId);
+		/*friend.setId(loggedInUserId);*/
 		
 		friend.setFriendId(loggedInUserId);
 		friend.setIsOnline('Y');
@@ -80,7 +78,7 @@ public class FriendController {
 	@RequestMapping(value="/acceptFriend/{friendId}", method = RequestMethod.GET )
 	public ResponseEntity<Friend> acceptFriendRequest(@PathVariable("friendId") int friendId,HttpSession session ) {
 		 int loggedInUserId =(Integer)session.getAttribute("loggedInUserId");
-			friend.setId(loggedInUserId);
+			/*friend.setId(loggedInUserId);*/
 			friend.setFriendId(loggedInUserId);
 			friend.setIsOnline('Y');
 			friend.setStatus("A");	// N - New, R->Reject, A->Accept

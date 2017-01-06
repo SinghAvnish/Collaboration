@@ -1,16 +1,19 @@
 package com.niit.collaborate.dao;
 
+
 import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.niit.collaborate.model.Friend;
 
+
 @Repository
-public class FriendDAOImpl implements FriendDAO
-{
+public class FriendDAOImpl implements FriendDAO{
 
 	public FriendDAOImpl() {
 		
@@ -23,6 +26,7 @@ public class FriendDAOImpl implements FriendDAO
 		
 		this.sessionFactory = sessionFactory;
 	}
+
 
 	public boolean save(Friend friend){
 		try {
@@ -45,6 +49,7 @@ public class FriendDAOImpl implements FriendDAO
 			e.printStackTrace();
 		}
 		return false;
+		
 	}
 
 	public List<Friend> getMyFriends(int id) {

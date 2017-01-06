@@ -5,7 +5,6 @@ import java.util.List;
 
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +30,7 @@ public class BlogDAOImpl implements BlogDAO
 			this.sessionFactory = sessionFactory;
 		}
 
-	    public List<Blog> getAllBlogs()
-	    {
+	    public List<Blog> getAllBlogs() {
 		@SuppressWarnings("unchecked")
 	    List<Blog> getAllBlogs = (List<Blog>) sessionFactory.getCurrentSession().createCriteria(Blog.class)
 	    .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
@@ -40,9 +38,9 @@ public class BlogDAOImpl implements BlogDAO
         return getAllBlogs ;
 	    }
 
-	    public Blog get(int id) {
+	    public Blog get(int c_id) {
 		Session session=sessionFactory.openSession();
-		Blog blog = (Blog)session.get(Blog.class, id);
+		Blog blog = (Blog)session.get(Blog.class, c_id);
 		if(blog!=null)
 			return blog;
 		else
@@ -60,28 +58,12 @@ public class BlogDAOImpl implements BlogDAO
 		
 	  } 
 
-	   public void delete(int id) {
+	   public void delete(int c_id) {
 		Blog blogToDelete = new Blog();
-		blogToDelete.setId(id);
+		blogToDelete.setId(c_id);
 		sessionFactory.getCurrentSession().delete(blogToDelete);
 		
 	}
-
-	public Blog getView(int id) {
-		String hql = "from Blog where id=" + "'"+id +"'";
-		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		
-		@SuppressWarnings("unchecked")
-		List<Blog> listBlog = (List<Blog>) query.list();
-		
-		if (listBlog != null && !listBlog.isEmpty()) {
-			return listBlog.get(0);
-		}
-		
-		return null;
-	
-	}
-	   
 
 	
 

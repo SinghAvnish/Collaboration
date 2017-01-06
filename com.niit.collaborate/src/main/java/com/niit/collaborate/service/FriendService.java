@@ -9,11 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.collaborate.dao.FriendDAOImpl;
 import com.niit.collaborate.model.Friend;
 
+
 @Transactional
 @Service
 public class FriendService {
-
-	
 	@Autowired (required=true)
 	FriendDAOImpl friendDAO;
 	

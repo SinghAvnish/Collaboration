@@ -21,10 +21,10 @@ public class BlogController
 	@Autowired(required=true)
 	private BlogService blogservice;
 	
-	@RequestMapping(value="/blog{id}", method = RequestMethod.GET )
-	public ResponseEntity<Blog> get(@PathVariable("id") Integer id) 
+	@RequestMapping(value="/blog/{c_id}", method = RequestMethod.GET )
+	public ResponseEntity<Blog> get(@PathVariable("c_id") Integer c_id) 
 	{
-		Blog blog = blogservice.get(id);
+		Blog blog = blogservice.get(c_id);
 		return new ResponseEntity<Blog>(blog, HttpStatus.OK);
 	}
 	
@@ -43,11 +43,11 @@ public class BlogController
         	  return new ResponseEntity<Void>(HttpStatus.CONFLICT);
                }
                HttpHeaders headers = new HttpHeaders();
-               headers.setLocation(builder.path("/blog{id}").buildAndExpand(blog.getId()).toUri());
+               headers.setLocation(builder.path("/blog{c_id}").buildAndExpand(blog.getId()).toUri());
                return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value="/blog{id}", method = RequestMethod.PUT )
+	@RequestMapping(value="/blog/{c_id}", method = RequestMethod.PUT )
 	public ResponseEntity<Blog> Update(@RequestBody Blog blog) 
 	{
 		blogservice.update(blog);
@@ -55,9 +55,9 @@ public class BlogController
 	}
 	
 	
-	@RequestMapping(value="/blog{id}", method = RequestMethod.DELETE )
-	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
-		blogservice.delete(id);
+	@RequestMapping(value="/blog/{c_id}", method = RequestMethod.DELETE )
+	public ResponseEntity<Void> delete(@PathVariable("c_id") Integer c_id) {
+		blogservice.delete(c_id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}	
 

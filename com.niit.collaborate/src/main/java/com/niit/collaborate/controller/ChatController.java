@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 
 import com.niit.collaborate.model.Message;
 import com.niit.collaborate.model.OutputMessage;
-@Controller
+
 public class ChatController 
 {
 	private static final Logger logger=

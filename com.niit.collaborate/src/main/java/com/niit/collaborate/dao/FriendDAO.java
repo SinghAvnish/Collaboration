@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.niit.collaborate.model.Friend;
 
-public interface FriendDAO 
-{
+
+
+public interface FriendDAO {
 	public List<Friend> getMyFriends(int id);  //BY USERID
 	public List<Friend> getMyFriend(int friendId);
 	public Friend get(int id, int friendId );

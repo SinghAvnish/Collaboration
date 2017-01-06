@@ -18,6 +18,8 @@ public class Friend extends baseDomain
 	private int friendId;
 	private String status;
 	private char isOnline;
+	
+	
 	public int getfId() {
 		return fId;
 	}

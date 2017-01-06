@@ -18,9 +18,7 @@ import com.niit.collaborate.model.Blog;
 		
 		public void update(Blog blog);
 		
-		public void delete(int id);
-		
-		public Blog getView(int id);
+		public void delete(int blogId);
 		    
 		} 
 
