@@ -1,9 +1,9 @@
 'use strict';
-app.factory('FriendService',['$http','$q','$rootScope',function($http, $q, $rootScope){
+app.factory('FriendService',['$http','$rootScope','$q',function($http, $rootscope, $q){
 	
 console.log("FriendService...")
 	
-	var BASE_URL = 'http://localhost:8070/com.niit.collaborate/';
+	var BASE_URL = 'http://localhost:8081/com.niit.collaborate';
 		return{
 		getMyFriends: function(){
 			return $http.get(BASE_URL+'/myFriends')

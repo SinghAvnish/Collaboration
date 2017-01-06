@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@page isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,14 +7,16 @@
 <body>
 <div class="container panel">
 <div ng-controller="UserController as ctrl">
-<h1 style="color:#22d686;">Profile</h1>
+<h1 style="color:red;">Profile</h1>
 <h3>
+
+PROFILE PIC: <image style="width:40px; height:40px" src="resources/images/{{selectedUser.id}}.jpg" /></br>
 Name: {{selectedUser.username}}</br></br>
 Email: {{selectedUser.email}}</br></br>
-Addres: {{selectedUser.address}}</br></br>
+Address: {{selectedUser.address}}</br></br>
 Role: {{selectedUser.role}}</br></br>
 </h3>
 </div>
 </div>
-</body>
+</body>r
 </html>

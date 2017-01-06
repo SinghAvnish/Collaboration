@@ -1,157 +1,206 @@
 'use strict';
+
 app.factory('User', ['$resource', function ($resource) {
-    return $resource('http://localhost:8070/com.niit.collaborate/user:id', {id: '@id'},
+    return $resource('http://localhost:8081/com.niit.collaborate/user/:id', {id: '@id'},
 	{
 		updateUser: {method: 'PUT'}
 	}
     );
 }]);
-app.controller('UserController', ['$http','$scope','$cookieStore','User','UserService','$rootScope','$location',function($http,$scope,$cookieStore,User, UserService,$rootScope,$location){ 
-    var ob = this;
-    ob.users=[];
-    ob.user = new User(); 
-    ob.fetchAllUsers = function(){
-        ob.users = User.query();
-    };
-    
-    ob.getSelectedUser = myProfile
-    function myProfile(){
-        console.log("MyProfile...")
-    	UserService.myProfile().then(function(d){
-   				ob.user = d;
-   				$location.path("/myProfile");
-   			},function(errResponse){
-   				console.error('Error while fetch profile');
-    	});
-    };
-    
-    ob.fetchAllUsers();
-    ob.addUser = function(){
-	console.log('Inside save');
-	if($scope.userForm.$valid) {
-	  ob.user.$save(function(user){
-	     console.log(user); 
-	     ob.flag = 'created';	
-	     ob.reset();	
-	     ob.fetchAllUsers();
-	  },
-	  function(err){
-	     console.log(err.status);
-	     ob.flag='failed';
-	  }
-          );
+
+app.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+            
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
         }
-    }; 
-    ob.editUser = function(id){
-	    console.log('Inside edit');
-            ob.user = User.get({ id: id}, function() {
-	       ob.flag = 'edit'; 
-	    });
-    };    
-    ob.updateUserDetail = function(){
-	console.log('Inside update');
-	if($scope.userForm.$valid) {
-    	   ob.user.$updateUser(function(user){
-    		console.log(user); 
-		ob.updatedId = user.id;
-		ob.reset();
-		ob.flag = 'updated'; 
-    		ob.fetchAllUsers();
-           });
-	}
-    };	
-    ob.Userdelete = function(id){
-	    console.log('Inside delete');
-	    ob.user = User.delete({ id: id}, function() {
-		ob.reset();  
-		ob.flag = 'deleted';
-    		ob.fetchAllUsers(); 
-	    });
-    };		
-    ob.reset = function(){
-    	ob.user = new User();
-        $scope.userForm.$setPristine();
-    };	
-    ob.cancelUpdate = function(id){
-	    ob.user = new User();
-	    ob.flag= '';	
-   	    ob.fetchAllUsers();
-    };  
+    };
+}]);
+
+app.controller('UserController', ['$http','$scope','$cookieStore','User','UserService','$location','$rootScope',function($http,$scope,$cookieStore,User, UserService,$location, $rootScope)  {
+    var self = this;
+    self.user= new User();    
+    self.users=[];         
+    self.fetchAllUsers = function(){
+        self.users = User.query();
+    };
+      
+self.getSelectedUser = myProfile
     
+function myProfile(){
+    console.log("MyProfile...")
+    UserService.myProfile($rootScope.currentUser.id).then(function(d){
+			self.user = d;
+			console.log("User Id ="+self.user.id);
+			$location.path("/myProfile");
+		},function(errResponse){
+			console.error('Error while fetch profile');
+		});
+    };
     
-   ob.authenticate=function(user)
-   {
-		console.log("authenticate...")
-		UserService
-		.authenticate(user)
-		.then(	
-		        		   
-		        		 function(d){
-		        			 
-		        			 ob.user= d;
-		        			 console
-		        			        .log("user.errorCode: "
-		        			 + ob.user.errorCode);
-		        			      if(ob.user.errorCode=="404")
-		        			      {
-		        			    	 alert("Invalid Credentials.  Please try again."); 
-		        			    	 
-		        			    	 ob.user.id="";
-		        			    	 ob.user.password="";
-		        			    	   
-		        			     }
-		        			      else
-		        			      {
-		        			    	 console
-		                                     .log("Valid credentials. Navigating to home page");
-		                            
-		        			    	 $rootScope.currentUser = {
-		                                    		 
-		                             	username : ob.user.username,
-		                                id : ob.user.id,
-		                                role : ob.user.role
-		                                    		 
-		                                };
-		        			    	    $http.defaults.headers.common['Authorization'] = 'Basic' 
-		        			    	    		+$rootScope.currentUser;
-		        			    	    $cookieStore
-		        			    	          .put(
-		        			    	        		  'currentUser',
-		        			    	        		  $rootScope.currentUser);
-		        			    	    $location.path('/') 
-		        			     }
-		        		 },
-		        		function (errResponse){
-		        			 console.err('Error while authenticate Blogs ');
-		        			 })
-		        		 };
-		        		 
-		        		 
-		 ob.login = function() {
-			 {
-				console.log('login validation?????',
-						ob.user);
-				ob.authenticate(ob.user);
-			 }
-		 }
-		
-		 /*ob.submit = funtion() 
-		 {
-				{
-					console.log('Saving New User', ob.user);
-					ob.createUser(ob.user);	 
-				}
-				ob.reset();
-		    }
-		*/	        
-		 ob.logout = function() 
-		 	{
-				$rootScope.currentUser = {};
-				$cookieStore.remove('currentUser');
-				 
-				console.log('calling the method logout of User Service')
-				UserService.logout()
-				$location.path('/');
-				 
-			};      		 
-}]);  
+    /*self.createUser = function(){
+        self.user.$save(function(){
+        	self.flag= 'created';	
+   	        self.reset();	
+            self.fetchAllUsers();
+        });
+    };*/
+     
+    
+    self.createUser = function()
+    {
+    var file = $scope.myFile;
+    var username=$scope.username;
+    var password=$scope.password;
+    var email=$scope.email;
+    var role=$scope.role;
+    var address=$scope.address;
+/* console.log('file is ' );
+console.dir(file);*/
+var uploadUrl = "http://localhost:8081/com.niit.collaborate/user";
+var fd = new FormData();
+fd.append('file', file);
+fd.append('username',username);
+fd.append('password',password);
+fd.append('email',email);
+fd.append('role',role);
+fd.append('address',address);
+console.log('Scope of user'+$scope.user);
+$http.post(uploadUrl, fd, {
+transformRequest : angular.identity,
+headers : {
+'Content-Type' : undefined
+}
+}).success(function() {
+console.log('success');
+}).error(function() {
+console.log('error');
+});
+}		
+
+
+
+    self.updateUserDetail = function(){
+    	console.log('Inside update');
+    	if($scope.userForm.$valid) {
+        	   self.user.$updateUser(function(user){
+        		console.log(user); 
+    		self.updatedId = user.id;
+    		self.reset();
+    		self.flag = 'updated'; 
+        		self.fetchAllUsers();
+               });
+    	}
+        };
+
+        
+   self.deleteUser = function(identity){
+       var user = User.get({id:identity}, function() {
+            user.$delete(function(){
+                console.log('Deleting user with id ', identity);
+                self.fetchAllUsers();
+            });
+       });
+    };
+
+    self.fetchAllUsers();
+
+   /* self.submit = function() {
+        if(self.user.id==null){
+            console.log('Saving New User', self.user);    
+            self.createUser();
+        }else{
+            console.log('Updating user with id ', self.user.id);
+            self.updateUser();
+            console.log('User updated with id ', self.user.id);
+        }
+        self.reset();
+    };*/
+         
+    self.edit = function(id){
+    	 console.log('Inside edit');
+         self.user = User.get({ id: id}, function() {
+	       self.flag = 'edit'; 
+	    });
+         
+    };
+         
+    self.remove = function(id){
+        console.log('id to be deleted', id);
+        if(self.user.id === id) {//If it is the one shown on screen, reset screen
+           self.reset();
+        }
+        self.deleteUser(id);
+    };
+
+     
+   self.reset = function(){
+        self.user= new User();
+        $scope.myForm.$setPristine(); //reset Form
+    };
+    
+    self.login= function (){
+    	{
+    	console.log('Login Validation????????', self.user);
+    	
+    	self.authenticate(self.user);
+    	
+    	
+    }
+    };
+    
+    self.logout = function(){
+    	$rootScope.currentUser = {};
+    	$cookieStore.remove('currentUser');
+
+    	console.log('calling the method logout of user service');
+    	UserService.logout()
+    	document.location.reload(true);
+    	$location.path('/');
+    	 
+    };
+
+
+    self.authenticate = function(user){
+    	console.log("authenticate...")
+    	UserService
+    	.authenticate(user)
+    	.then(
+    			function(d){
+    				self.user=d;
+    				console.log("user.errorCode:"+self.user.errorCode)
+    				if(self.user.errorCode== "404")
+    					{
+    					alert("Invalid Credentials.Please try again")
+    					self.user.username="";
+    					self.user.password="";
+    					}
+    				else{
+    					console.log("Valid creditials.Navigating to index page")
+    					$rootScope.currentUser={
+    						username:self.user.username,
+    						id:self.user.id,
+    						role:self.user.role
+    					};
+    					$http.defaults.headers.common['Authorization']= 'Basic'+$rootScope.currentUser;
+    					$cookieStore.put(
+    								'currentUser',$rootScope.currentUser);
+    					/*document.location.reload(true);*/
+    					$location.path('/')
+    				}
+    			},
+    			function(errResponse){
+    				console.err('Error while authenticate Users');
+    			});
+    	 
+    }
+   
+
+}]);

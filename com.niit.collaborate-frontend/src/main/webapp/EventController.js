@@ -1,13 +1,12 @@
-/*'use strict';
-
+'use strict';
 app.factory('Event', ['$resource', function ($resource) {
-    return $resource('http://localhost:8070/com.niit.com/event/:id', {id: '@id'},
+    return $resource('http://localhost:8081/com.niit.collaborate/event/:id', {id: '@id'},
 	{
 		updateEvent: {method: 'PUT'}
 	}
     );
 }]);
-app.controller('EventController', ['$scope', 'Event', function($scope,Event) {
+app.controller('EventController', ['Event$scope', 'Event', function($scope,Event) {
     var ob = this;
     ob.events=[];
     ob.event = new Event(); 
@@ -66,4 +65,4 @@ app.controller('EventController', ['$scope', 'Event', function($scope,Event) {
 	    ob.flag= '';	
    	    ob.fetchAllEvents();
     };    
-}]); */
+}]); 

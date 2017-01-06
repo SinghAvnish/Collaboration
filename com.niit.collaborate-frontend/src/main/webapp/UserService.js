@@ -2,7 +2,7 @@
  
 app.factory('UserService', ['$http', '$q','$rootScope', function($http, $q, $rootScope){
 		console.log("UserService")
-    var BASE_URL = 'http://localhost:8070/com.niit.collaborate';
+    var BASE_URL = 'http://localhost:8081/com.niit.collaborate';
 			
 		return {				
 			

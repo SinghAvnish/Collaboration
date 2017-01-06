@@ -1,68 +1,67 @@
 'use strict';
 app.factory('Forum', ['$resource', function ($resource) {
-    return $resource('http://localhost:8081/com.niit.collaborate/forum:forumid', {forumid: '@forumid'},
+    return $resource('http://localhost:8081/com.niit.collaborate/forum/:forumId', {forumId: '@forumId'},
 	{
-		updateBlog: {method: 'PUT'}
+		updateForum: {method: 'PUT'}
 	}
     );
 }]);
+
 app.controller('ForumController', ['$scope', 'Forum', function($scope, Forum) {
-    var self = this;
-    self.forums=[];
-    self.forum = new Forum(); 
-    self.fetchAllForums = function(){
-    	self.blogs = Blog.query();
+    
+	var ob = this;
+    ob.forums=[];
+    ob.forum = new Forum(); 
+    
+    ob.fetchAllForums = function(){
+        ob.forums = Forum.query();
     };
-    self.fetchAllForums();
-    self.addForum = function(){
-	console.log('Inside save');
-	if($scope.forumForm.$valid) {
-		self.forum.$save(function(forum){
-	     console.log(forum); 
-	     self.flag= 'created';	
-	     self.reset();	
-	     self.fetchAllForums();
-	  },
-	  function(err){
-	     console.log(err.status);
-	     self.flag='failed';
-	  }
-          );
-        }
-    }; 
-    self.editForum = function(forumid){
-	    console.log('Inside edit');
-	    self.forum = Forum.get({ forumid: forumid}, function() {
-	    	self.flag = 'edit'; 
+    ob.fetchAllForums();
+    ob.createForum = function(){
+        ob.forum.$save(function(){
+        	ob.flag= 'created';	
+   	        ob.reset();	
+            ob.fetchAllForums();
+        });
+    };
+    
+    ob.edit = function(forumId){
+   	 console.log('Inside edit');
+        ob.forum = Forum.get({ forumId: forumId}, function() {
+	       ob.flag = 'edit'; 
 	    });
-    };    
-    self.updateForumDetail = function(){
+        
+   };    
+   
+    ob.updateForumDetail = function(){
 	console.log('Inside update');
 	if($scope.forumForm.$valid) {
-		self.blog.$updateForum(function(forum){
+    	   ob.forum.$updateForum(function(forum){
     		console.log(forum); 
-    		self.updatedId = forum.forumid;
-    		self.reset();
-    		self.flag = 'updated'; 
-    		self.fetchAllForums();
+		ob.updatedId = forum.forumId;
+		ob.reset();
+		ob.flag = 'updated'; 
+    		ob.fetchAllForums();
            });
 	}
-    };	
-    self.Forumdelete = function(forumid){
-	    console.log('Inside delete');
-	    self.forum Forum.delete({ forumid: forumid}, function() {
-	    	self.reset();  
-	    	self.flag = 'deleted';
-	    	self.fetchAllForums(); 
-	    });
-    };		
-    self.reset = function(){
-    	self.forum = new Forum();
+    };
+    
+    ob.deleteForum = function(identity){
+        var forum = Forum.get({forumId:identity}, function() {
+             forum.$delete(function(){
+                 console.log('Deleting forum with forumId ', identity);
+                 ob.fetchAllForums();
+             });
+        });
+     };	
+     
+     ob.reset = function(){
+    	ob.forum = new Forum();
         $scope.forumForm.$setPristine();
     };	
-    self.cancelUpdate = function(forumid){
-    	self.forum = new Forum();
-	    self.flag= '';	
-	    self.fetchAllForums();
-    };   
+    ob.cancelUpdate = function(forumId){
+	    ob.forum = new Forum();
+	    ob.flag= '';	
+   	    ob.fetchAllForums();
+    };    
 }]);     
