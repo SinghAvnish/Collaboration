@@ -5,109 +5,112 @@ app.config(function($routeProvider){
 	
     .when('/', {
          controller: 'HomeController',
-         templateUrl: 'home.html',
+         templateUrl: 'Home/home.html',
          
      })
      
+       
+     .when('/aboutus', {
+                controller: 'UserController',
+                templateUrl: 'Aboutus/aboutus.html',
+            })
+     
      .when('/myProfile', {
                 controller: 'UserController',
-                templateUrl: 'profile.html',
+                templateUrl: 'User/profile.html',
             })
 
     .when('/login', {
          controller: 'UserController',
-         templateUrl: 'login.html',
+         templateUrl: 'User/login.html',
      })
      
-      /*.when('/userlist', {
+      .when('/userlist', {
          controller: 'UserController',
-         templateUrl: 'userlist.html',
+         templateUrl: 'User/userlist.html',
      })
-*/
+
      .when('/blog', {
         controller: 'BlogController',
         controller: 'BlogCommentController',
         controller: 'BlogLikeController',
         
-        templateUrl: 'blog.html',
+        templateUrl: 'Blog/blog.html',
          
      })
      
     
      .when('/viewblog', {
          controller: 'BlogController',
-         templateUrl: 'viewblog.html',
+         templateUrl: 'Blog/viewblog.html',
         
      })
      
       .when('/user', {
          controller: 'UserController',
-         templateUrl: 'login.html',
+         templateUrl: 'User/login.html',
          
      })
       .when('/event', {
         controller: 'EventController',
-         templateUrl: 'event.html',
+         templateUrl: 'Event/event.html',
         
      })
      
      .when('/register', {
         controller: 'UserController',
-         templateUrl: 'user.html',
+         templateUrl: 'User/user.html',
         
      })
      
      .when('/user', {
         controller: 'UserController',
-         templateUrl: 'user.html',
+         templateUrl: 'User/user.html',
         
      })
      
       .when('/chat', {
         controller: 'ChatController',
-         templateUrl: 'chat.html',
+         templateUrl: 'Chat/chat.html',
         
      })		
      
        .when('/forum', {
         controller: 'ForumController',
-         templateUrl: 'forum.html',
+         templateUrl: 'Forum/forum.html',
         
      })
-     .when('/chatforum', {
-		controller : 'ChatForumController',
-		templateUrl : 'chatforum.html'
-	})
+    
 	.when('/postjob', {
          controller: 'JobController',
-         templateUrl: 'postjob.html',
+         templateUrl: 'Job/postjob.html',
         
      })
      .when('/searchjob', {
          controller: 'JobController',
-         templateUrl: 'searchjob.html',
+         templateUrl: 'Job/searchjob.html',
         
      })
      .when('/viewjob', {
          controller: 'JobController',
-         templateUrl: 'viewjob.html',
+         templateUrl: 'Job/viewjob.html',
         
      })
     .when('/viewjobdetails', {
          controller: 'JobController',
-         templateUrl: 'viewjobdetails.html',
+         templateUrl: 'Job/viewjobdetails.html',
         
      })
      
       .when('/friend', {
         controller: 'FriendController',
-         templateUrl: 'viewfriend.html',
+         templateUrl: 'Friend/view_friends.html',
         
      })
      
        .when('/friendrequest', {
                 controller: 'FriendController',
-                templateUrl: 'friend.html',
+                templateUrl: 'Friend/friend.html',
             })
   
      

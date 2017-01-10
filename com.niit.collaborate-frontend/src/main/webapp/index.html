@@ -20,14 +20,21 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/com.niit.collaborate">Home</a></li>
+        <li class="active"><a href="/com.niit.collaborate-frontend">Home</a></li>
          
+         <li><a href="#/aboutus">About Us</a></li>
           	<li><a href="#/blog">Blog</a></li>
-            <!--  <li><a href="#/bloglist">Blog List</a></li> -->
           
+          <!-- 
+            <li><a href="#/viewjob">View Job</a></li>
+            <li><a href="#/postjob">Post Job</a></li>
+             <li><a href="#/viewjobdetails">ViewJobDetails</a></li>
+              <li><a href="#/searchjob">Search  Job</a></li>
           
-           <li><a href="#/event">Events</a></li><!-- 
-            <li><a href="#/userlist">UserList</a></li> -->
+         -->
+          
+           <li><a href="#/event">Events</a></li>
+            <li><a href="#/userlist">UserList</a></li> 
            <li><a href="#/forum">Forum</a></li>
            
             <li><a href="#/friend">Friends</a></li>
@@ -65,28 +72,35 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9/angular-route.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9/angular-cookies.js"></script>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.js"></script>
 
-<script src="sockjs.js"></script>
-<script src="stomp.js"></script>
-<script src="lodash.js"></script>
-<script src="npm.js"></script>
- <script src="lodash.min.js"></script> 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+
+<!-- <script src="resources/js/sockjs.js"></script>
+<script src="resources/js/stomp.js"></script>
+<script src="resources/js/stomp.min.js"></script>
+<script src="resources/js/lodash.js"></script>
+<script src="resources/js/lodash.min.js"></script>  -->
  
  <script src="myapp.js"></script>
  
- <script src="HomeController.js"></script>
-<script src="UserController.js"></script>
-<script src="UserService.js"></script>
- <script src="BlogController.js"></script> 
-<script src="EventController.js"></script>
- <script src="ChatController.js"></script> 
- <script src="ChatService.js"></script>
-  <script src="FriendController.js"></script> 
-  <script src="FriendService.js"></script> 
-  <script src="ForumController.js"></script>
-  <script src="BlogCommentController.js"></script>
-  <script src="BlogLikeController.js"></script>
-   <script src="JobController.js"></script>
-  <script src="JobService.js"></script>
+ <script src="Home/HomeController.js"></script>
+<script src="User/UserController.js"></script>
+<script src="User/UserService.js"></script>
+ <script src="Blog/BlogController.js"></script> 
+<script src="Event/EventController.js"></script>
+ <script src="Chat/ChatController.js"></script> 
+ <script src="Chat/ChatService.js"></script>
+  <script src="Friend/FriendController.js"></script> 
+  <script src="Friend/FriendService.js"></script> 
+  <script src="Forum/ForumController.js"></script>
+  <script src="BlogComment/BlogCommentController.js"></script>
+  <script src="BlogLike/BlogLikeController.js"></script>
+   <script src="Job/JobController.js"></script>
+  <script src="Job/JobService.js"></script>
 
 </html>
