@@ -100,7 +100,7 @@ public class UserController
 			
 			user.setEmail(email);
 			user.setAddress(address);
-			user.setRole("user");
+			user.setRole("Student");
 			user.setUsername(username);
 			user.setPassword(password);
 			userservice.save(user);
