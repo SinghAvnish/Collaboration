@@ -35,22 +35,16 @@ background-image:  url("images/background-stripe-cream-v2.jpg");
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<label class="control-label" for="name">Title:</label> 
 		        <input type="text" class="form-control" name="forumTitle" placeholder="Title" ng-model="forumCtrl.forum.forumTitle" required/> 
-         	      <span ng-show="forumForm.forumTitle.$error.required" class="msg-val">Forum is required.</span> 
+         	      <span ng-show="forumForm.forumTitle.$error.required" class="msg-val">Title is required.</span> 
 			</div>
 		</div>
 		
-		<!-- <div class="form-group">
-		<div class="col-xs-6 col-sm-6 col-md-6">
-				<label class=" control-label" for="comment">User Id:</label> 
-		       <input type="text"  class="form-control" name="id" placeholder="User Id" ng-model="forumCtrl.blog.id" required/> 
-	            <span ng-show="forumForm.id.$error.required" class="msg-val">Id is required.</span> 
-		</div>
-		</div> -->
+		
 		<div class="form-group">
 		<div class="col-xs-6 col-sm-6 col-md-6">
-			<label class="col-md-1 control-label" for="comment">Description:</label> 
+			<label class="col-md-1 control-label" for="name">Description:</label> 
 		  	<textarea type="textarea" class="form-control" placeholder="Description" maxlength="140" rows="5" name="forumDescription" ng-model="forumCtrl.forum.forumDescription" required/> 
-	        <span ng-show="forumForm.c_desc.$error.required" class="msg-val">Description is required.</span> 
+	        <span ng-show="forumForm.forumDescription.$error.required" class="msg-val">Description is required.</span> 
 		</div>
 		</div>
 		

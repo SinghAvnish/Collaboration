@@ -24,7 +24,7 @@
 		<div ng-repeat="friend in ctrl.friends | filter: search_txt">
 			<fieldset>
 				<legend></legend>
-				<p>Name: {{friend}} &nbsp; &nbsp; &nbsp; Status : {{friend.status}}
+				<p>Name: {{friend.friendId}} &nbsp; &nbsp; &nbsp; Status : {{friend.status}}
 				<a href="#/chat">Send Message</a>
 			</fieldset>
 		</div>

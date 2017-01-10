@@ -37,10 +37,12 @@
 		      <td>Address: </td> <td><input type="text" name="address" ng-model="address" required/><br> 
          	      <span ng-show="userForm.address.$error.required" class="msg-val">Address is required.</span> </td>
 		</tr>
-		<tr>
-		      <td>Role: </td> <td><input type="text" name="role" ng-model="role" required/><br> 
-         	      <span ng-show="userForm.role.$error.required" class="msg-val">Role is required.</span> </td>
-		</tr>
+		
+		            <div class="row">
+ 					<div class="col-lg-12">
+ 					<input type="file" file-model="myFile"/>
+ 					</div>
+ 					</div>
 		
 		
 		
@@ -62,11 +64,6 @@
 		    </div> </td>
 		</tr>
 		
-		            <div class="row">
- 					<div class="col-lg-12">
- 					<input type="file" file-model="myFile"/>
- 					</div>
- 					</div>
 		<tr>
 		     <td colspan="2"> <span ng-if="userCtrl.flag=='deleted'" class="msg-success">User successfully deleted.</span>
 		</tr>
