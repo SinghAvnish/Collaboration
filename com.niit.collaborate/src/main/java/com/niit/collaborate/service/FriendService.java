@@ -20,7 +20,8 @@ public class FriendService {
 		return friendDAO.save(friend);
 	}
 
-	public boolean update(Friend friend){
+	public boolean update(Friend friend)
+	{
 		return friendDAO.update(friend);
 	}
 	

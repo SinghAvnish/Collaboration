@@ -17,7 +17,7 @@ public class Job extends baseDomain{
 	private String description;
 	private Date dateTime;
 	private String qualification;
-	private String status;
+	private char status;
 	
 	
 	public int getJobId() {
@@ -56,12 +56,13 @@ public class Job extends baseDomain{
 	public void setQualification(String qualification) {
 		this.qualification = qualification;
 	}
-	public String getStatus() {
+	public char getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(char status) {
 		this.status = status;
 	}
+	
 	
 	
 	

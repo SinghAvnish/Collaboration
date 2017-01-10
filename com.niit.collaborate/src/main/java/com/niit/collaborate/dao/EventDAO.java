@@ -8,11 +8,10 @@ package com.niit.collaborate.dao;
 
 	public interface EventDAO 
 	{
-		public List<Event> getAllEvents();
-		public Event getEvent(int id);
-		public boolean save(Event event);
-		public void update(Event event);
-		public void delete(int id);
-		 
+		List<Event> getAllEvent();
+		Event getEventById(int id);
+	    boolean addEvent(Event event);
+	    void updateEvent(Event event);
+	    void deleteEvent(int id);
 		
 	} 

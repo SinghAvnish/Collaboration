@@ -13,55 +13,53 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.niit.collaborate.model.Blog;
 import com.niit.collaborate.model.Event;
 import com.niit.collaborate.service.EventService;
+;
+
 @RestController
-public class EventController
-{
-
-	@Autowired(required=true)
-	private EventService eventservice;
+public class EventController {
+	@Autowired (required=true)
+	private EventService eventService;
 	
-	@RequestMapping(value="/event{id}", method = RequestMethod.GET )
-	public ResponseEntity<Event> get(@PathVariable("id") Integer id) 
-	{
-		Event event = eventservice.getEventById(id);
+	// To get Event id
+		@RequestMapping(value="/event/{id}", method = RequestMethod.GET )
+		public ResponseEntity<Event> getEventById(@PathVariable("id") Integer id) {
+			Event event = eventService.getEventById(id);
+			return new ResponseEntity<Event>(event, HttpStatus.OK);
+		}
+		
+		// To get all events
+		@RequestMapping(value= "/event", method = RequestMethod.GET)
+		public ResponseEntity<List<Event>> getAllEvent() {
+			List<Event> list = eventService.getAllEvent();
+			return new ResponseEntity<List<Event>>(list, HttpStatus.OK);
+		}
+	//To Add Event 
+		@RequestMapping(value= "/event", method = RequestMethod.POST)
+		public ResponseEntity<Void> addEvent(@RequestBody Event event, UriComponentsBuilder builder) {
+	        boolean flag = eventService.addEvent(event);
+	               if (flag == false) {
+	        	  return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+	               }
+	               HttpHeaders headers = new HttpHeaders();
+	               headers.setLocation(builder.path("/event/{id}").buildAndExpand(event.getId()).toUri());
+	               return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		}
+		
+	
+	//To Update update
+	@RequestMapping(value="/event/{id}", method = RequestMethod.PUT )
+	public ResponseEntity<Event> updateevent(@RequestBody Event event) {
+		eventService.updateEvent(event);
 		return new ResponseEntity<Event>(event, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value= "/event", method = RequestMethod.GET)
-	public ResponseEntity<List<Event>> list() 
-	{
-		List<Event> list = eventservice.getAllEvents();
-		return new ResponseEntity<List<Event>>(list, HttpStatus.OK);
-	}
-	
-	@RequestMapping(value= "/event", method = RequestMethod.POST)
-	public ResponseEntity<Void> save(@RequestBody Event event, UriComponentsBuilder builder)
-	{
-        boolean flag = eventservice.save(event);
-               if (flag == false) {
-        	  return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-               }
-               HttpHeaders headers = new HttpHeaders();
-               headers.setLocation(builder.path("/event{id}").buildAndExpand(event.getId()).toUri());
-               return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-	}
-	
-	@RequestMapping(value="/event{id}", method = RequestMethod.PUT )
-	public ResponseEntity<Event> Update(@RequestBody Event event) 
-	{
-		eventservice.update(event);
-		return new ResponseEntity<Event>(event, HttpStatus.OK);
-	}
-	
-	
-	@RequestMapping(value="/event{id}", method = RequestMethod.DELETE )
-	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
-		eventservice.delete(id);
+	// To delete event
+	@RequestMapping(value="/event/{id}", method = RequestMethod.DELETE )
+	public ResponseEntity<Void> deleteEvent(@PathVariable("id") Integer id) {
+		eventService.deleteEvent(id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-	}	
-
+	} 
 
 }

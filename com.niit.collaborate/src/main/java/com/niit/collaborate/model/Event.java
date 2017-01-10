@@ -1,31 +1,31 @@
 package com.niit.collaborate.model;
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table (name = "C_EVENT")
 public class Event {
-
 	@Id
-	@GeneratedValue (strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="EVENT_SEQ")
+	@SequenceGenerator(name="EVENT_SEQ",sequenceName="EVENT_SEQ",allocationSize=1)
+
 	private int id;
 	private String name;
 	private String venue;
 	private String description;
-	@Column(name="date_time")
+	/*@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd a z")*/
 	private String dateTime;
 	
-	
-	public Integer getId() {
+	public int getId() 
+	{
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) 
+	{
 		this.id = id;
 	}
 	public String getName() {
@@ -46,21 +46,14 @@ public class Event {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	@Override
-	public String toString() {
-		return "Event [id=" + id + ", name=" + name + ", venue=" + venue + ", description=" + description
-				+ ", dateTime=" + dateTime + "]";
-	}
 	public String getDateTime() {
 		return dateTime;
 	}
 	public void setDateTime(String dateTime) {
+		
 		this.dateTime = dateTime;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	
 	
+
 }
