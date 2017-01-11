@@ -75,13 +75,26 @@ app.config(function($routeProvider){
         
      })		
      
-       .when('/forum', {
+      .when('/chatforum', 
+    		  {
+                controller: 'ChatForumController',
+                templateUrl: 'ChatForum/chatforum.html',
+            })
+     
+     
+     
+     
+       .when('/forum',
+    	{
         controller: 'ForumController',
-         templateUrl: 'Forum/forum.html',
+        controller: 'ForumCommentController',
+        controller: 'ForumLikeController',
+        templateUrl: 'Forum/forum.html',
         
-     })
+    	})
+     
     
-	.when('/postjob', {
+	/*.when('/postjob', {
          controller: 'JobController',
          templateUrl: 'Job/postjob.html',
         
@@ -101,7 +114,19 @@ app.config(function($routeProvider){
          templateUrl: 'Job/viewjobdetails.html',
         
      })
-     
+     */
+    	 .when('/joblist', {
+		        controller: 'JobController',
+		        controller: 'JobApplicationController',
+		        templateUrl: 'Job/joblist.html',
+		        
+		    })
+		    .when('/viewappliedjob', {
+		         controller: 'JobApplicationController',
+		         templateUrl: 'Job/viewappliedjob.html',
+		        
+		     })
+		    
       .when('/friend', {
         controller: 'FriendController',
          templateUrl: 'Friend/view_friends.html',
@@ -137,6 +162,7 @@ app.run( function ($rootScope, $location,$cookieStore, $http)
 			
     
         else
+        	
         	{
         		var role= $rootScope.currentUser.role;
         		var userRestrictedPage=  $.inArray($location.path(), ['/user']) == 0;

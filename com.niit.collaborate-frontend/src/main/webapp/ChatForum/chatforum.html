@@ -1,10 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="resources/css/style.css">
 <title>Insert title here</title>
 </head>
-<body ng-controller="ChatController" class="container">
+<body>
+<div ng-controller="ChatForumController" class="container">
 <form ng-submit="addMessage()" name="messageForm">
 	<div class="form-group">
 	<div class="col-xs-6 ">
@@ -20,12 +22,10 @@
 	
 	</form>
 	
-	  <div class="container" style="margin-top:50px" >
+ <div class="container" style="margin-top:50px" >
 	<p style="margin-top:20px" ng-repeat ="message in messages | orderBy: 'time':true" class="message">
 	<time>{{message.time | date: 'HH:mm'}}</time><span ng-class="{{self.message.self}}"> : {{message.message}}</span>
 	
-	</p>
-	</div>
-	
+</div>
 </body>
 </html>

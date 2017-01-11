@@ -8,7 +8,8 @@
  <script src="resources/js/UserController.js"></script> -->   
  </head>
  <body>
-<div ng-controller="UserController as ctrl">
+<div  ng-controller="UserController as ctrl">
+    <div class="container"> 
     <div ng-show='ctrl.user.errorMessage'>
        <div class="alert alert-danger fade in">
            {{ctrl.user.errorMessage}}</div>
@@ -39,6 +40,7 @@
                  </div>
                  </form>
     </span>
+    </div>
     </div>
     </body>
     </html>
