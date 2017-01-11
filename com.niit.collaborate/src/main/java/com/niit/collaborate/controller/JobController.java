@@ -1,83 +1,89 @@
 package com.niit.collaborate.controller;
 
-
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.niit.collaborate.model.Job;
-import com.niit.collaborate.model.JobApplication;
 import com.niit.collaborate.service.JobService;
 
 
+
 @RestController
-public class JobController {
-	
-	@Autowired(required=true)
-	 private JobService jobService;
-	
-	
+public class JobController 
+{
+	@Autowired(required = true)
+	private JobService jobService;
 
+	@RequestMapping(value="/job", method=RequestMethod.GET)
+	public ResponseEntity<List<Job>> listJobs(){
+		
+		List<Job> job = jobService.listJob();
+		if(job.isEmpty()){		
+			return new ResponseEntity<List<Job>>(HttpStatus.NO_CONTENT);		
+		}	
+		return new ResponseEntity<List<Job>>(job,HttpStatus.OK);	
+	}
 	
-	
-		@RequestMapping(value= "/job", method = RequestMethod.GET)
-			public ResponseEntity<List<Job>> getAllJobs() {
-			List<Job> job = jobService.getAllJobs();
-			return new ResponseEntity<List<Job>>(job, HttpStatus.OK);
+	@RequestMapping(value="/job", method=RequestMethod.POST)
+	public ResponseEntity<Job> createJob(@RequestBody Job job, HttpSession session){
+		
+		if(jobService.get(job.getJobId())== null)
+		{
+			int loggedInUserID = (Integer)session.getAttribute("loggedInUserId");
+			job.setUserId(loggedInUserID);
+			job.setStatus('V');
+			jobService.addJob(job);
+			return new ResponseEntity<Job>(job,HttpStatus.OK);
 		}
-		
-		// To Post job
-		
-		@RequestMapping(value= "/job", method = RequestMethod.POST)
-		public ResponseEntity<Void> postJob(@RequestBody Job job, UriComponentsBuilder builder) {
-			job.setStatus('V');   //1. V-vacant, 2.F-Filled, 3. P-pending
-	        boolean flag = jobService.postJob(job);
-	               if (flag == false) {
-	        	  return new ResponseEntity<Void>(HttpStatus.CONFLICT);
-	               }
-	               HttpHeaders headers = new HttpHeaders();
-	               headers.setLocation(builder.path("/postJob/{id}").buildAndExpand(job.getId()).toUri());
-	               return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+		return new ResponseEntity<Job>(job,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/job/{jobId}", method=RequestMethod.DELETE)
+	public ResponseEntity<Job> deleteJob(@PathVariable("jobId") int jobId)
+	{
+		Job job=jobService.get(jobId);
+		if(job==null)
+		{
+			job=new Job();
+			return new ResponseEntity<Job>(job,HttpStatus.NOT_FOUND);
 		}
+		jobService.delete(jobId);
+		return new ResponseEntity<Job>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/job/{jobId}", method=RequestMethod.GET)
+	public ResponseEntity<Job> getJob(@PathVariable("jobId") int jobId, HttpSession session)
+	{
+		Job job=jobService.get(jobId);
+		session.setAttribute("jId", job.getJobId());
+		/*if(job==null)
+		{
+			job=new Job();
+			return new ResponseEntity<Job>(job,HttpStatus.NOT_FOUND);
+		}*/
+		return new ResponseEntity<Job>(job,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/job/{jobId}", method=RequestMethod.PUT)
+	public ResponseEntity<Job> updateJob(@RequestBody Job job){
 		
-		
-		// To Update Job
-		
-			@RequestMapping(value="/job/{id}", method = RequestMethod.PUT )
-			public ResponseEntity<Job> updateJob(@RequestBody Job job) {
-				jobService.updateJob(job);
-				return new ResponseEntity<Job>(job, HttpStatus.OK);
-			}
-
-			// To get All vacant Job
-			
-			@RequestMapping(value= "/jobAllVacant", method = RequestMethod.GET)
-			public ResponseEntity<List<Job>> getAllVacantJobs() {
-				List<Job> job = jobService.getAllVacantJobs();
-				return new ResponseEntity<List<Job>>(job, HttpStatus.OK);
-			}
-
-			// To apply Job
-			
-			@RequestMapping(value="/getMyAppliedJobs",method=RequestMethod.GET)
-			public ResponseEntity<List<JobApplication>> getMyAppliedJobs(HttpSession httpSession)
-			{
-				String loggedInUserID=(String) httpSession.getAttribute("loggedInUserID");
-				List<JobApplication> jobs=jobService.getMyAppliedJobs(loggedInUserID);
-				return new ResponseEntity<List<JobApplication>>(jobs,HttpStatus.OK);
-			}
-
-
-
-
+		if(jobService.get(job.getJobId())== null)
+		{
+			job=new Job();
+			return new ResponseEntity<Job>(job,HttpStatus.NOT_FOUND);	
+		}
+		jobService.updateJob(job);
+		return new ResponseEntity<Job>(job,HttpStatus.OK);
+	}
+	
 }

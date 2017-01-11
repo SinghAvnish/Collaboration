@@ -8,27 +8,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+
 public class JobApplication {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int jobAppId;
-	private int id;
+	private int jobApplicationId;
+	private int userId;
 	private int jobId;
-    private Date dateTime;
-    private String remarks;
-    private char status;
-    
-	public int getJobAppId() {
-		return jobAppId;
+	/*private String dateApplied;*/
+	private char status;
+	
+	public int getJobApplicationId() {
+		return jobApplicationId;
 	}
-	public void setJobAppId(int jobAppId) {
-		this.jobAppId = jobAppId;
+	public void setJobApplicationId(int jobApplicationId) {
+		this.jobApplicationId = jobApplicationId;
 	}
-	public int getId() {
-		return id;
+	public int getUserId() {
+		return userId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public int getJobId() {
 		return jobId;
@@ -36,29 +37,16 @@ public class JobApplication {
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
 	}
-	public Date getDateTime() {
-		return dateTime;
+	/*public String getDateApplied() {
+		return dateApplied;
 	}
-	public void setDateTime(Date dateTime) {
-		this.dateTime = dateTime;
-	}
-	public String getRemarks() {
-		return remarks;
-	}
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
+	public void setDateApplied(String dateApplied) {
+		this.dateApplied = dateApplied;
+	}*/
 	public char getStatus() {
 		return status;
 	}
 	public void setStatus(char status) {
 		this.status = status;
 	}
-	public void setDateTime(Object dateTime2) {
-		
-		
-	}
-	
-	
-
 }

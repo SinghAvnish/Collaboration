@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name="c_Blog")
 @Component
-public class Blog extends baseDomain {
+public class Blog extends BaseDomain {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

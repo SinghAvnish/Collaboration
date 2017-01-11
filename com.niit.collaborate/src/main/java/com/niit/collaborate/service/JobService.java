@@ -9,48 +9,34 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborate.dao.JobDAOImpl;
 import com.niit.collaborate.model.Job;
-import com.niit.collaborate.model.JobApplication;
 
 
-
-@Transactional
 @Service
+@Transactional
 public class JobService {
-	@Autowired (required=true)
-	JobDAOImpl jobDAO;
+	
+	@Autowired
+	public JobDAOImpl jobDAOImpl;
 	
 	
-	public boolean postJob(Job job) {
-		return jobDAO.postJob(job);
+	public void addJob(Job job)
+	{
+		jobDAOImpl.addJob(job);
 	}
-	
-	public boolean updateJob(Job job) {
-		return jobDAO.updateJob(job);
+	public List<Job> listJob()
+	{
+		return jobDAOImpl.listJob();
 	}
-	
-	public List<Job> getAllVacantJobs() {
-		return jobDAO.getAllVacantJobs();
+	public void delete(int jobId)
+	{
+		jobDAOImpl.delete(jobId);
 	}
-	
-	public List<Job> getAllJobs() {
-		return jobDAO.getAllJobs();
+	public Job get(int jobId)
+	{
+		return jobDAOImpl.get(jobId);
 	}
-	
-	public boolean applyForJob(JobApplication jobApplication) {
-		return jobDAO.applyForJob(jobApplication);
+	public void updateJob(Job job)
+	{
+		jobDAOImpl.updateJob(job);
 	}
-	
-	public boolean updateJobApplication(JobApplication jobApplication) {
-		
-		return jobDAO.updateJobApplication(jobApplication);
-	}
-	
-	public JobApplication get(String id, String jobId) {
-		return jobDAO.get(id, jobId);
-	}
-	
-	public List<JobApplication> getMyAppliedJobs(String id) {
-		return jobDAO.getMyAppliedJobs(id);
-	}
-
 }

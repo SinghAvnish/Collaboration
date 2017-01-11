@@ -1,8 +1,9 @@
 package com.niit.collaborate.model;
 
+
 import javax.persistence.Transient;
 
-public class baseDomain 
+public class BaseDomain 
 {
 	@Transient
 	String errorCode;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-public class Friend extends baseDomain
+public class Friend extends BaseDomain
 
 {
 	@Id

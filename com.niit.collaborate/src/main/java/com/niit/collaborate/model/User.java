@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 @Table(name="c_User")
 
-public class User extends baseDomain
+public class User extends BaseDomain
 {
 @GeneratedValue(strategy = GenerationType.AUTO)	
 @Id
